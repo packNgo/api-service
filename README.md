@@ -1,2 +1,2 @@
 # api-service
-packNgo Authentication service
+packNgo API integration service
