@@ -22,6 +22,12 @@ app.get('/trails/:ids', async (req: Express.Request, res: Express.Response) => {
     res.status(200).json({ hiking})
 })
 
+app.get('/trails/:ids/conditions', async (req: Express.Request, res: Express.Response) => {
+    const hiking = await HikingAPI.getTrailConditions(req.params.ids.split(','))
+
+    res.status(200).json({ hiking })
+})
+
 app.listen(PORT, (): void => {
     console.log(`listening *:${PORT}`)
 })

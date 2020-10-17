@@ -75,6 +75,24 @@ const getTrailsByCordinates = async (queryString: ParsedQs) => {
     }
 }
 
+const getTrailConditions = async (ids: string[] | number[]) => {
+    try {
+        if (!ids) throw Error('Trail id not provided.')
+
+        const uri = `https://www.hikingproject.com/data/get-conditions?ids=${ids.join(',')}&key=${API_KEY}`
+
+        return await axios.get(uri)
+            .then((response: AxiosResponse) => {
+                return { success: true, data: response.data }
+            })
+            .catch(err => {
+                throw err
+            })
+    } catch (error) {
+        return { success: false, error: error.message }
+    }
+}
+
 const validateQueryString = (query: ParsedQs) => {
     const { lon, lat, maxDistance, maxResults, sort, minLength, minStars } = query
     // TODO: finish this later.
@@ -91,5 +109,6 @@ const validateQueryString = (query: ParsedQs) => {
 
 export {
     getTrailsByCordinates,
-    getTrailByIds
+    getTrailByIds,
+    getTrailConditions
 }
