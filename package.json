@@ -5,7 +5,7 @@
   "main": "dist",
   "scripts": {
     "start": "npm run build & node dist",
-    "dev": "nodemon -w src -e ts --exec \"ts-node src\"",
+    "dev": "nodemon --ignore \"src/types\" -w src -e ts --exec \"ts-node src\"",
     "build": "tsc -p ."
   },
   "keywords": [],
