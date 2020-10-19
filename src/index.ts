@@ -1,6 +1,6 @@
 import Express from 'express'
 import { config } from 'dotenv'
-import * as HikingAPI from './services/Hiking'
+import * as HikingCenterApi from './services/Hiking'
 
 config()
 
@@ -10,23 +10,12 @@ const PORT: string | number = process.env.PORT || 4000
 
 app.use(Express.json())
 
-app.get('/trails', async (req: Express.Request, res: Express.Response) => {
-    const hiking = await HikingAPI.getTrailsByCordinates(req.query)
+app.get('/hiking/trails', async (req: Express.Request, res: Express.Response): Promise<void> => {
+    const response = await HikingCenterApi.getTrails(req.query)
 
-    res.status(200).json([{hiking}])
+    res.status(response.code).json(response)
 })
 
-app.get('/trails/:ids', async (req: Express.Request, res: Express.Response) => {
-    const hiking = await HikingAPI.getTrailByIds(req.params.ids.split(','))
-
-    res.status(200).json({ hiking})
-})
-
-app.get('/trails/:ids/conditions', async (req: Express.Request, res: Express.Response) => {
-    const hiking = await HikingAPI.getTrailConditions(req.params.ids.split(','))
-
-    res.status(200).json({ hiking })
-})
 
 app.listen(PORT, (): void => {
     console.log(`listening *:${PORT}`)
