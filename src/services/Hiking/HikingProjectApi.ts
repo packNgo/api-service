@@ -13,7 +13,6 @@ async function getTrails(queryString: ParsedQs): Promise<HikingResponse> {
     if (maxDistance && !isNaN(Number(maxDistance))) {
         maxDistance = Number(maxDistance) > 200 ? '200' : Number(maxDistance) < 30 ? '30' : maxDistance
     }
-
     if (maxResults && !isNaN(Number(maxResults))) {
         maxResults = Number(maxResults) > 500 ? '500' : Number(maxResults) < 10 ? '10' : maxResults
     }
@@ -31,6 +30,7 @@ async function getTrails(queryString: ParsedQs): Promise<HikingResponse> {
 
     const response = await getHikingProjectTrails(queryString)
 
+    console.log(response)
     return response
 }
 
