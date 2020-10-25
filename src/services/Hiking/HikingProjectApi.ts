@@ -1,6 +1,6 @@
 import { ParsedQs } from 'qs'
 import { HikingResponse } from '../../helper/HikingResponse'
-import { getHikingProjectTrails } from '../axiosService'
+import { getHikingProjectTrails,getHikingProjectTrailsByIds ,getHikingProjectTrailsConditionsByID} from '../axiosService'
 
 const KEY = process.env.HIKING_KEY || ''
 
@@ -34,18 +34,22 @@ async function getTrails(queryString: ParsedQs): Promise<HikingResponse> {
     return response
 }
 
-function getTrailsByID(ids: ParsedQs): HikingResponse {
+async function getTrailsByID(ids: ParsedQs):Promise<HikingResponse>{
     if (!ids && String(ids).split(',').length < 1)
         return HikingResponse(false, 'Must include one or more ID.')
 
-    return HikingResponse(true, [])
+        const response = await getHikingProjectTrailsByIds(ids)
+        console.log(response)
+    return response
 }
 
-function getConditionsByID(ids: ParsedQs): HikingResponse {
+async function getConditionsByID(ids: ParsedQs): Promise<HikingResponse> {
     if (!ids && String(ids).split(',').length < 1)
         return HikingResponse(false, 'Must include one or more ID.')
 
-    return HikingResponse(true, [])
+        const response = await getHikingProjectTrailsConditionsByID(ids)
+        console.log(response)
+    return response
 }
 
 export {

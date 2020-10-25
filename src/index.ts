@@ -45,6 +45,16 @@ app.get('/hiking/trails', async (req: Express.Request, res: Express.Response): P
     res.status(response.code).json(response)
 })
 
+app.get('/hiking/trailsById',async(req:Express.Request, res:Express.Response):Promise<void>=>{
+    const response = await HikingCenterApi.getTrailsByID(req.query)
+    res.status(response.code).json(response)
+})
+
+app.get('/hiking/trailsConditions',async (req:Express.Request,res:Express.Response):Promise<void>=>{
+    const response = await HikingCenterApi.getConditionsByID(req.query)
+    res.status(response.code).json(response)
+})
+
 // https://www.hikingproject.com/data
 
 httpServer.listen(PORT, (): void => {

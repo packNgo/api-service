@@ -8,16 +8,16 @@ async function getTrails(queryString: ParsedQs): Promise<HikingResponse> {
     return HikingResponse(true, hikingProject)
 }
 
-function getTrailsByID(queryString: ParsedQs): HikingResponse {
-    const hikingProject = HikingProjectApi.getTrailsByID(queryString)
+async function getTrailsByID(queryString: ParsedQs): Promise<HikingResponse> {
+    const hikingProject =await HikingProjectApi.getTrailsByID(queryString)
 
-    return HikingResponse(true, { hikingProject })
+    return HikingResponse(true, hikingProject )
 }
 
-function getConditionsByID(queryString: ParsedQs): HikingResponse {
-    const hikingProject = HikingProjectApi.getConditionsByID(queryString)
+async function getConditionsByID(queryString: ParsedQs): Promise<HikingResponse> {
+    const hikingProject = await HikingProjectApi.getConditionsByID(queryString)
 
-    return HikingResponse(true, { hikingProject })
+    return HikingResponse(true,  hikingProject )
 }
 
 export {
